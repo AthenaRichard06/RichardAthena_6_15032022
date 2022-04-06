@@ -1,4 +1,4 @@
-// Appel du protocole HTTP
+// Appel du protocole HTTP qui permet de répondre aux requêtes de ce type
 const http = require ("http");
 
 // Import de l'application dans le serveur
@@ -33,7 +33,7 @@ const rechercheErreurs = erreur => {
             process.exit (1);
             break;
         case "EADDRINUSE":
-            console.error (liaison + " est déjà en cours d'utilissation.");
+            console.error (liaison + " est déjà en cours d'utilisation.");
             process.exit (1);
             break;
         default:

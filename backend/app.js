@@ -2,7 +2,7 @@
 const dotenv = require("dotenv");
 dotenv.config();
 
-// Import d'Express
+// Import d'Express pour créer des applications avec Node.js
 const express = require ("express");
 
 // Import de Mongoose

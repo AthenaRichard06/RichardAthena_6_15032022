@@ -10,7 +10,7 @@ const utilisateurSchema = mongoose.Schema ({
     password: { type: String, required: true },
 });
 
-// Application du validateur au schéma avant d'en faire un modèle
+// Application du validateur au schéma, qui permet de valider les données, notamment l'email unique
 utilisateurSchema.plugin (uniqueValidator);
 
 // Export du modèle

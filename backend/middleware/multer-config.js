@@ -13,6 +13,7 @@ const stockage = multer.diskStorage({
     destination: (requete, fichier, callback) => {
         callback(null, "images")
     },
+    // On renomme le fichier afin qu'il n'y ait pas deux fichiers du même nom
     filename: (requete, fichier, callback) => {
         const nom = fichier.originalname.split(" ").join("_");
         const extension = MIME_TYPES[fichier.mimetype];

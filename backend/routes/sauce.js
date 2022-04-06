@@ -1,4 +1,4 @@
-// Import d'Express
+// Import d'Express pour créer des applications avec Node.js
 const express = require ("express");
 
 // Création d'un router via Express
