@@ -1,11 +1,11 @@
 // Import de bcrypt pour les mots de passe
 const bcrypt = require ("bcrypt");
 
-// Import de jsonwebtoken
-const jsonwebtoken = require ("jsonwebtoken");
-
 // Import du modèle utilisateurSchema
 const Utilisateur = require ("../models/utilisateur");
+
+// Import de jsonwebtoken
+const jsonwebtoken = require ("jsonwebtoken");
 
 // Logiques métiers des différentes demandes CRUD
 // Créer un compte
@@ -36,9 +36,9 @@ exports.connexionCompte = (requete, reponse, next) => {
                         return reponse.status(401).json({ erreur }); 
                     }
                     reponse.status(200).json({
-                        userId: user._id,
+                        userId: utilisateur._id,
                         token: jsonwebtoken.sign(
-                            { userId: user._id },
+                            { userId: utilisateur._id },
                             process.env.Token,
                             { expiresIn: "24h" }
                         )

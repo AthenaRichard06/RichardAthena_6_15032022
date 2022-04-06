@@ -1,3 +1,7 @@
+// Import des variables d'environnement stockées dans le fichier .env
+const dotenv = require("dotenv");
+dotenv.config();
+
 // Import de jsonwebtoken
 const jsonwebtoken = require ("jsonwebtoken");
 
@@ -5,7 +9,7 @@ const jsonwebtoken = require ("jsonwebtoken");
 module.exports = (requete, reponse, next) => {
     try {
         const token = requete.headers.authorization.split(" ")[1];
-        const decoderToken = jsonwebtoken.verify(token, "RANDOM_TOKEN_SECRET");
+        const decoderToken = jsonwebtoken.verify(token, `${process.env.Token}`);
         const userId = decoderToken.userId;
         requete.auth = { userId };
         if (requete.body.userId && requete.body.userId !== userId) {
