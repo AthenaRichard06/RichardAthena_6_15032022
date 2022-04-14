@@ -25,7 +25,7 @@ const utilisateurRoutes = require ("./routes/utilisateur");
 const cors = require ("cors");
 let corsOptions = {
     origin: 'http://localhost:4200'
-}
+};
 
 // Connexion de l'API à la base de données MongoDB
 mongoose.connect(`mongodb+srv://${process.env.Mongo_Utilisateur}:${process.env.Mongo_Motdepasse}@${process.env.Mongo_Hote}/${process.env.Mongo_Nom}?retryWrites=true&w=majority`, {
@@ -41,7 +41,7 @@ const application = express();
 // Intercepte toutes les requêtes qui ont un content-type json et nous met à dispo le body dans le contenu de la requête
 application.use (express.json());
 
-// Erreurs de CORS à corriger
+// Erreurs de CORS (Cross-Origin Resource Sharing) à corriger
 application.use((requete, reponse, next) => {
     reponse.setHeader('Access-Control-Allow-Origin', '*');
     reponse.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');

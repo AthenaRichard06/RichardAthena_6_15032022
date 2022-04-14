@@ -10,7 +10,7 @@ motdepasseSchema
     .has().uppercase()                              // Doit contenir une cap
     .has().lowercase()                              // Doit contenir une bdc
     .has().digits(2)                                // 2 chiffres minimum
-    .has().not().spaces()                           // De doit pas avoir d'espace
+    .has().not().spaces()                           // Ne doit pas avoir d'espace
     .is().not().oneOf(['Passw0rd', 'Password123']); // Empêche l'utilisation de ces mots de passe (très simples, donc pas sécurisés)
 
 
