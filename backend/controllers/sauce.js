@@ -44,6 +44,11 @@ exports.modificationSauce = (requete, reponse, next) => {
         imageUrl: `${requete.protocol}://${requete.get("host")}/images/${requete.file.filename}`
         // Si non, mise à jour de la sauce, à partir des autres éléments de la requête du body
     } : { ...requete.body };
+    // On vérifie que l'Id de l'utilisateur est le même que l'Id de celui qui a crée la sauce
+    if (sauce.userId !== requete.auth.userId) {
+        return reponse.status(401).json({ erreur })
+    }
+    // On enregistre la sauce
     Sauce.updateOne({ _id: requete.params.id }, {
         ...sauceObjet, _id: requete.params.id
     })
