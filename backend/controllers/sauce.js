@@ -59,7 +59,6 @@ exports.modificationSauce = (requete, reponse, next) => {
     })
     .catch(erreur => reponse.status(500).json({ erreur }));
 };
-    
 
 // Suppresion d'une sauce
 exports.suppressionSauce = (requete, reponse, next) => {
