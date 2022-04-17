@@ -36,25 +36,30 @@ exports.modificationSauce = (requete, reponse, next) => {
         })
         .catch(erreur => reponse.status(500).json({ erreur }));
     }
-    // On demande si un fichier accompagne la requête/modification
-    const sauceObjet = requete.file ?
-    {
+    Sauce.findOne({ _id: requete.params.id })
+    .then((sauce) => {
+        // On demande si un fichier accompagne la requête/modification
+        const sauceObjet = requete.file ?
+        {
         // Si oui, mise à jour complète de la sauce, à partir des éléments compris dans la requête du body
         ...JSON.parse(requete.body.sauce),
         imageUrl: `${requete.protocol}://${requete.get("host")}/images/${requete.file.filename}`
         // Si non, mise à jour de la sauce, à partir des autres éléments de la requête du body
-    } : { ...requete.body };
-    // On vérifie que l'Id de l'utilisateur est le même que l'Id de celui qui a crée la sauce
-    if (sauce.userId !== requete.auth.userId) {
-        return reponse.status(401).json({ erreur })
-    }
-    // On enregistre la sauce
-    Sauce.updateOne({ _id: requete.params.id }, {
-        ...sauceObjet, _id: requete.params.id
+        } : { ...requete.body };
+        // On vérifie que l'Id de l'utilisateur est le même que l'Id de celui qui a crée la sauce
+        if (sauce.userId !== requete.auth.userId) {
+            return reponse.status(401).json({ erreur })
+        }
+        // On enregistre la sauce
+        Sauce.updateOne({ _id: requete.params.id }, {
+            ...sauceObjet, _id: requete.params.id
+        })
+            .then(() => reponse.status(200).json({ message : "Sauce modifiée !"}))
+            .catch(erreur => reponse.status(400).json({ erreur }));
     })
-        .then(() => reponse.status(200).json({ message : "Sauce modifiée !"}))
-        .catch(erreur => reponse.status(400).json({ erreur }));
+    .catch(erreur => reponse.status(500).json({ erreur }));
 };
+    
 
 // Suppresion d'une sauce
 exports.suppressionSauce = (requete, reponse, next) => {
